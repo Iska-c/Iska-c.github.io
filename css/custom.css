@@ -6,3 +6,20 @@
   visibility: visible !important;
 }
 
+/* ===============================
+   Unify post & page width (Fluid)
+   =============================== */
+
+/* Override Bootstrap grid width */
+#board .col-md-10 {
+  max-width: 860px !important;  
+  flex: 0 0 100% !important;
+}
+
+/* Mobile padding */
+@media (max-width: 767.98px) {
+  #board .col-md-10 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

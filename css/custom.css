@@ -23,3 +23,56 @@
     padding-right: 15px;
   }
 }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
+
+.status-badge--ongoing {
+  color: #8a4b08;
+  background: #ffe7b8;
+}
+
+.status-badge--done {
+  color: #0f5c45;
+  background: #cfeee3;
+}
+
+.index-header .status-badge {
+  margin-left: 8px;
+  transform: translateY(-1px);
+}
+
+.status-inline {
+  margin-left: 8px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.status-inline::before {
+  content: "·";
+  margin-right: 6px;
+  color: #a0aec0;
+}
+
+.status-inline--ongoing {
+  color: #8a4b08;
+}
+
+.status-inline--done {
+  color: #0f5c45;
+}
+
+.footer-content:empty {
+  display: none;
+}

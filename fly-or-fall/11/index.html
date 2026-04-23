@@ -73,7 +73,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -353,6 +353,7 @@
 
 </div>
 
+
               
   
 
@@ -594,6 +595,45 @@
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
+    function decorateCollapsibleToc() {
+      var tocBody = jQuery('#toc-body');
+      if (!tocBody.length) { return; }
+
+      tocBody.find('.toc-collapse-toggle').remove();
+      tocBody.find('.toc-list-item').removeClass('toc-item-collapsed toc-item-expanded');
+
+      tocBody.find('.toc-list-item').each(function() {
+        var item = jQuery(this);
+        var childList = item.children('ol');
+        var link = item.children('a.tocbot-link');
+        if (!childList.length || !link.length) { return; }
+
+        childList.removeClass('tocbot-is-collapsed tocbot-is-collapsible').show();
+
+        var targetId = decodeURIComponent(link.attr('href') || '').replace(/^#/, '');
+        var heading = targetId ? document.getElementById(targetId) : null;
+        if (!heading || heading.tagName !== 'H3') {
+          item.addClass('toc-item-expanded');
+          return;
+        }
+
+        item.addClass('toc-item-collapsed');
+
+        var toggle = jQuery('<button class="toc-collapse-toggle" type="button" aria-expanded="false" aria-label="展开子目录"></button>');
+        toggle.on('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          var expanded = item.hasClass('toc-item-expanded');
+          item.toggleClass('toc-item-expanded', !expanded);
+          item.toggleClass('toc-item-collapsed', expanded);
+          toggle.attr('aria-expanded', expanded ? 'false' : 'true');
+        });
+
+        link.after(toggle);
+      });
+      tocBody.find('.toc-item-expanded > .toc-collapse-toggle').attr('aria-expanded', 'true');
+    }
+
     window.tocbot.init(Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
@@ -603,10 +643,12 @@
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
       scrollSmooth    : true,
+      disableTocScrollSync: true,
       includeTitleTags: true,
       headingsOffset  : -boardTop,
     }, CONFIG.toc));
     if (toc.find('.toc-list-item').length > 0) {
+      decorateCollapsibleToc();
       toc.css('visibility', 'visible');
     }
 
@@ -618,6 +660,7 @@
           return;
         }
         if (toc.find('.toc-list-item').length > 0) {
+          decorateCollapsibleToc();
           toc.css('visibility', 'visible');
         }
       }

@@ -725,10 +725,11 @@ sup > a::before,
 }
 .tocbot-link {
   color: var(--text-color);
+  line-height: 1.35;
 }
 .tocbot-active-link {
-  font-weight: bold;
-  color: var(--link-hover-color);
+  font-weight: inherit;
+  color: var(--text-color);
 }
 .tocbot-is-collapsed {
   max-height: 0;
@@ -738,14 +739,13 @@ sup > a::before,
   transition: all 0.3s ease-in-out;
 }
 .toc-list-item {
+  position: relative;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .toc-list-item.is-active-li::before {
-  height: 1rem;
-  margin: 0.25rem 0;
-  visibility: visible;
+  visibility: hidden;
 }
 .toc-list-item::before {
   width: 0.15rem;
@@ -758,6 +758,41 @@ sup > a::before,
   background: var(--link-hover-color);
   visibility: hidden;
   transition: height 0.1s ease-in-out, margin 0.1s ease-in-out, visibility 0.1s ease-in-out;
+}
+.toc-list-item > a.tocbot-link {
+  display: inline-block;
+  max-width: calc(100% - 2.8rem);
+}
+.toc-collapse-toggle {
+  position: absolute;
+  top: -0.15rem;
+  right: 0;
+  width: 2.15rem;
+  height: 2.15rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.toc-collapse-toggle:hover {
+  background: rgba(0,0,0,0.06);
+}
+.toc-collapse-toggle::before {
+  content: "▸";
+  display: block;
+  font-size: 1.25rem;
+  line-height: 2.15rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.toc-item-collapsed > ol {
+  display: none;
+}
+.toc-item-expanded > .toc-collapse-toggle::before {
+  transform: rotate(90deg);
 }
 .sidebar {
   position: -webkit-sticky;

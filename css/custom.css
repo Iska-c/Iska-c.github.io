@@ -38,16 +38,6 @@
   transform: translateY(-2px);
 }
 
-.status-badge--ongoing {
-  color: #8a4b08;
-  background: #ffe7b8;
-}
-
-.status-badge--done {
-  color: #0f5c45;
-  background: #cfeee3;
-}
-
 .index-header .status-badge {
   margin-left: 8px;
   transform: translateY(-1px);
@@ -65,14 +55,7 @@
   color: #a0aec0;
 }
 
-.status-inline--ongoing {
-  color: #8a4b08;
-}
-
-.status-inline--done {
-  color: #0f5c45;
-}
-
 .footer-content:empty {
   display: none;
 }
+

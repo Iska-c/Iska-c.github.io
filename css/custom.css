@@ -59,34 +59,41 @@
   display: none;
 }
 
-/* ===== 强制覆盖 Fluid 标题样式（只作用章节目录） ===== */
-
 .markdown-body .chapter-index h3 {
-  font-size: 1rem !important;
-  margin: 0.8em 0 0.3em 0 !important;
-  font-weight: 600 !important;
-  line-height: 1.4 !important;
+  position: relative;
 }
 
-.markdown-body .chapter-index h4 {
-  font-size: 0.9rem !important;
-  margin: 0.15em 0 !important;
-  font-weight: 400 !important;
-  line-height: 1.5 !important;
+.markdown-body .chapter-index-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
 }
 
-/* 去掉 Fluid 给标题加的额外 spacing */
-.markdown-body .chapter-index h3::before,
-.markdown-body .chapter-index h4::before {
-  display: none !important;
+.markdown-body .chapter-index-toggle::before {
+  content: "▸";
+  display: block;
+  font-size: 2rem !important;
+  line-height: 2.5rem !important;
+  text-align: center;
+  transition: transform .2s ease;
 }
 
-/* 链接样式 */
-.markdown-body .chapter-index h4 a {
-  color: inherit !important;
-  text-decoration: none !important;
+.markdown-body .chapter-index-section.is-expanded > h3 .chapter-index-toggle::before {
+  transform: rotate(90deg);
 }
 
-.markdown-body .chapter-index h4 a:hover {
-  text-decoration: underline !important;
+.markdown-body .chapter-index-children {
+  overflow: hidden;
+}
+
+.markdown-body .chapter-index-section:not(.is-expanded) .chapter-index-children {
+  display: none;
 }

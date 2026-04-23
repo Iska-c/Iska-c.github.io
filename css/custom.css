@@ -97,3 +97,51 @@
 .markdown-body .chapter-index-section:not(.is-expanded) .chapter-index-children {
   display: none;
 }
+
+:root {
+  --reader-font-scale: 1;
+}
+
+/* 只缩放正文，不动首页、导航、banner、评论等 */
+/* 只有被 JS 标记为 reader-font-enabled 的页面才缩放 */
+.reader-font-enabled .markdown-body {
+  font-size: calc(1rem * var(--reader-font-scale));
+}
+
+.reader-font-controls {
+  position: fixed;
+  right: 18px;
+  bottom: 76px;
+  z-index: 9999;
+  display: flex;
+  gap: 6px;
+}
+
+.reader-font-controls button {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.15);
+  background: rgba(255,255,255,.9);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reader-font-controls {
+  position: fixed;
+  right: 18px;
+  bottom: 76px;
+  z-index: 9999;
+  display: flex;
+  gap: 6px;
+}
+
+.reader-font-controls button {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.15);
+  background: rgba(255,255,255,.9);
+  cursor: pointer;
+  font-size: 14px;
+}

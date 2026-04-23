@@ -54,3 +54,79 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+
+(function () {
+  const KEY = 'reader-font-scale';
+  const MIN = 0.85;
+  const MAX = 1.35;
+  const STEP = 0.05;
+
+  function isReadingPage() {
+  const path = window.location.pathname;
+
+  // 排除目录页
+  if (path === '/fly-or-fall/' || path === '/race-condition' || path === '/tokyo-trash-map/') {
+    return false;
+  }
+
+  return !!document.querySelector('.markdown-body');
+}
+
+  function clamp(value) {
+    return Math.min(MAX, Math.max(MIN, value));
+  }
+
+  function applyScale(scale) {
+    document.documentElement.style.setProperty('--reader-font-scale', scale);
+    localStorage.setItem(KEY, String(scale));
+  }
+
+  function createControls() {
+    // 只有正文页才显示
+    if (!isReadingPage()) return;
+    if (document.querySelector('.reader-font-controls')) return;
+    document.documentElement.classList.add('reader-font-enabled');
+
+    const box = document.createElement('div');
+    box.className = 'reader-font-controls';
+
+    const smaller = document.createElement('button');
+    smaller.textContent = 'A-';
+
+    const reset = document.createElement('button');
+    reset.textContent = 'A';
+
+    const larger = document.createElement('button');
+    larger.textContent = 'A+';
+
+    box.appendChild(smaller);
+    box.appendChild(reset);
+    box.appendChild(larger);
+    document.body.appendChild(box);
+
+    let scale = parseFloat(localStorage.getItem(KEY) || '1');
+    applyScale(scale);
+
+    smaller.addEventListener('click', function () {
+      scale = clamp(scale - STEP);
+      applyScale(scale.toFixed(2));
+    });
+
+    reset.addEventListener('click', function () {
+      scale = 1;
+      applyScale(scale);
+    });
+
+    larger.addEventListener('click', function () {
+      scale = clamp(scale + STEP);
+      applyScale(scale.toFixed(2));
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createControls);
+  } else {
+    createControls();
+  }
+})();

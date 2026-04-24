@@ -1,7 +1,7 @@
 .reader-tools {
   position: fixed;
-  right: 18px;
-  bottom: 20px;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,18 @@
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+
+@media (max-width: 767.98px) {
+  .reader-tools {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    gap: 8px;
+    padding: 8px;
+  }
 }
 
 #scroll-top-button,

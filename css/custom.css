@@ -28,9 +28,6 @@
   .reader-tools {
     right: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom));
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
     gap: 8px;
     padding: 8px;
   }

@@ -20,7 +20,7 @@
     clearTimeout(hideTimer);
     hideTimer = setTimeout(function () {
       toolbar.classList.remove('is-visible');
-    }, 1500);
+    }, 1800);
   }
 
   window.ReaderToolbar = {
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const icon = downBtn.querySelector('i');
       if (icon) {
         icon.className = 'iconfont icon-arrowup';
-        icon.style.transform = 'rotate(180deg)';
+        icon.classList.add('scroll-down-icon');
       }
     }
     toolbar.insertBefore(downBtn, toolbar.firstChild);

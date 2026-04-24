@@ -65,15 +65,31 @@
   color: #315da8;
 }
 
+#scroll-down-button i.scroll-down-icon {
+  transform: rotate(180deg);
+}
+
 #scroll-down-button:hover i,
 #scroll-down-button:active i {
-  animation-name: scroll-top;
+  animation-name: scroll-bottom;
   animation-duration: 1s;
   animation-delay: .1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
   animation-direction: alternate;
+}
+
+@keyframes scroll-bottom {
+  0% {
+    transform: rotate(180deg) translateY(0);
+  }
+  50% {
+    transform: rotate(180deg) translateY(-0.35rem);
+  }
+  100% {
+    transform: rotate(180deg) translateY(0);
+  }
 }
 
 #scroll-top-button:hover,

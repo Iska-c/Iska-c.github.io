@@ -1,9 +1,73 @@
-#scroll-top-button{
-  bottom: 18px !important;
-  right: 18px !important;
+.reader-tools {
+  position: fixed;
+  right: 18px;
+  bottom: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(20, 35, 70, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.reader-tools.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+#scroll-top-button,
+#scroll-down-button,
+.reader-font-controls button {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  border-radius: 999px;
+  border: 1px solid rgba(38, 72, 128, 0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(244,248,255,.94));
+  box-shadow: 0 4px 12px rgba(34, 63, 120, 0.10);
+}
+
+#scroll-top-button,
+#scroll-down-button {
+  position: static !important;
+  z-index: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease !important;
+}
+
+#scroll-top-button i,
+#scroll-down-button i {
+  font-size: 30px;
+  margin: auto;
+  color: #315da8;
+}
+
+#scroll-top-button:hover,
+#scroll-down-button:hover,
+.reader-font-controls button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(34, 63, 120, 0.16);
+}
+
+#scroll-top-button:active,
+#scroll-down-button:active,
+.reader-font-controls button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(34, 63, 120, 0.12);
 }
 
 /* ===============================
@@ -50,9 +114,7 @@
 }
 
 .status-inline::before {
-  content: "·";
-  margin-right: 6px;
-  color: #a0aec0;
+  content: none;
 }
 
 .footer-content:empty {
@@ -109,39 +171,18 @@
 }
 
 .reader-font-controls {
-  position: fixed;
-  right: 18px;
-  bottom: 76px;
-  z-index: 9999;
   display: flex;
-  gap: 6px;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(49, 93, 168, 0.12);
 }
 
 .reader-font-controls button {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.15);
-  background: rgba(255,255,255,.9);
   cursor: pointer;
   font-size: 14px;
-}
-
-.reader-font-controls {
-  position: fixed;
-  right: 18px;
-  bottom: 76px;
-  z-index: 9999;
-  display: flex;
-  gap: 6px;
-}
-
-.reader-font-controls button {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.15);
-  background: rgba(255,255,255,.9);
-  cursor: pointer;
-  font-size: 14px;
+  font-weight: 600;
+  color: #315da8;
+  letter-spacing: 0.01em;
 }

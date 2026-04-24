@@ -20,7 +20,7 @@
     clearTimeout(hideTimer);
     hideTimer = setTimeout(function () {
       toolbar.classList.remove('is-visible');
-    }, 2500);
+    }, 1500);
   }
 
   window.ReaderToolbar = {

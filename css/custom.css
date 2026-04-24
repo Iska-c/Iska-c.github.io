@@ -65,6 +65,17 @@
   color: #315da8;
 }
 
+#scroll-down-button:hover i,
+#scroll-down-button:active i {
+  animation-name: scroll-top;
+  animation-duration: 1s;
+  animation-delay: .1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
 #scroll-top-button:hover,
 #scroll-down-button:hover,
 .reader-font-controls button:hover {

@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
       toggle.type = 'button';
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', '展开章节');
+      toggle.innerHTML = '<i class="iconfont icon-arrowright" aria-hidden="true"></i>';
 
       toggle.addEventListener('click', function (event) {
         event.preventDefault();

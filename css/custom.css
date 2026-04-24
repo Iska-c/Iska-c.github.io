@@ -157,17 +157,45 @@
   display: none;
 }
 
-.markdown-body .chapter-index h3 {
-  position: relative;
+.markdown-body .chapter-index--categorylike h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 16px 0 6px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  color: #111 !important;
 }
 
-.markdown-body .chapter-index-toggle {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: 2.5rem !important;
-  height: 2.5rem !important;
+.markdown-body .chapter-index--categorylike h4 {
+  margin: 10px 0 !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+}
+
+.markdown-body .chapter-index--categorylike h4 a {
+  display: inline-block;
+  color: var(--text-color) !important;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.markdown-body .chapter-index--categorylike h4 a:hover,
+.markdown-body .chapter-index--categorylike h4 a:focus,
+.markdown-body .chapter-index--categorylike h4 a:active {
+  color: var(--link-hover-color) !important;
+  text-decoration: none;
+}
+
+.markdown-body .chapter-index--categorylike .chapter-index-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: auto !important;
+  height: auto !important;
   padding: 0;
   border: none;
   background: transparent;
@@ -175,24 +203,25 @@
   cursor: pointer;
 }
 
-.markdown-body .chapter-index-toggle::before {
-  content: "▸";
-  display: block;
-  font-size: 2rem !important;
-  line-height: 2.5rem !important;
-  text-align: center;
+.markdown-body .chapter-index--categorylike .chapter-index-toggle i {
+  display: inline-block;
+  margin-left: 0.15rem;
+  font-size: 1.05rem !important;
+  line-height: 1;
   transition: transform .2s ease;
 }
 
-.markdown-body .chapter-index-section.is-expanded > h3 .chapter-index-toggle::before {
+.markdown-body .chapter-index--categorylike .chapter-index-section.is-expanded > h3 .chapter-index-toggle i {
   transform: rotate(90deg);
 }
 
-.markdown-body .chapter-index-children {
+.markdown-body .chapter-index--categorylike .chapter-index-children {
   overflow: hidden;
+  width: 100%;
+  padding-left: 1.25rem;
 }
 
-.markdown-body .chapter-index-section:not(.is-expanded) .chapter-index-children {
+.markdown-body .chapter-index--categorylike .chapter-index-section:not(.is-expanded) .chapter-index-children {
   display: none;
 }
 

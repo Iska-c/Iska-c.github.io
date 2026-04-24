@@ -177,12 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
     window.ReaderToolbar.show();
     window.addEventListener('scroll', window.ReaderToolbar.show, { passive: true });
 
-    document.addEventListener('click', function (event) {
-      if (box.contains(event.target)) return;
-      window.ReaderToolbar.show();
-    });
-
     box.addEventListener('click', window.ReaderToolbar.show);
+    box.addEventListener('touchstart', window.ReaderToolbar.show, { passive: true });
   }
 
   if (document.readyState === 'loading') {
@@ -231,13 +227,10 @@ document.addEventListener('DOMContentLoaded', function () {
     window.ReaderToolbar.show();
     window.addEventListener('scroll', window.ReaderToolbar.show, { passive: true });
 
-    document.addEventListener('click', function (event) {
-      if (upBtn.contains(event.target) || downBtn.contains(event.target)) return;
-      window.ReaderToolbar.show();
-    });
-
     upBtn.addEventListener('click', window.ReaderToolbar.show);
     downBtn.addEventListener('click', window.ReaderToolbar.show);
+    upBtn.addEventListener('touchstart', window.ReaderToolbar.show, { passive: true });
+    downBtn.addEventListener('touchstart', window.ReaderToolbar.show, { passive: true });
   }
 
   if (document.readyState === 'loading') {

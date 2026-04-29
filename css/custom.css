@@ -70,8 +70,36 @@ html[data-user-color-scheme="dark"] {
   .reader-tools {
     right: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom));
-    gap: 8px;
-    padding: 8px;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 999px;
+  }
+
+  #scroll-top-button,
+  #scroll-down-button,
+  .reader-font-controls button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+
+  #scroll-top-button i,
+  #scroll-down-button i {
+    font-size: 26px;
+  }
+
+  .reader-font-controls {
+    flex-direction: row;
+    gap: 6px;
+    margin-top: 0;
+    margin-left: 2px;
+    padding-top: 0;
+    padding-left: 8px;
+    border-top: none;
+    border-left: 1px solid var(--reader-tools-divider);
   }
 }
 

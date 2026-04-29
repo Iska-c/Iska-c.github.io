@@ -134,11 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // 排除目录页
     if (
       path === '/fly-or-fall/' ||
-      path === '/fly-or-fall' ||
       path === '/race-condition/' ||
-      path === '/race-condition' ||
       path === '/tokyo-trash-map/' ||
-      path === '/tokyo-trash-map'
+      path === '/about/' 
     ) {
       return false;
     }
@@ -157,54 +155,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function createControls() {
     if (!isReadingPage()) return;
-    if (document.querySelector('.reader-font-controls')) return;
+    if (document.querySelector('.reader-font-link')) return;
 
     document.documentElement.classList.add('reader-font-enabled');
-    const toolbar = window.ReaderToolbar.getToolbar();
+    const colorToggleItem = document.querySelector('#color-toggle-btn');
+    const navList = colorToggleItem && colorToggleItem.parentNode;
+    if (!navList) return;
 
-    const box = document.createElement('div');
-    box.className = 'reader-font-controls';
+    function createFontButton(text, label) {
+      const item = document.createElement('li');
+      item.className = 'nav-item reader-font-nav-item';
 
-    const smaller = document.createElement('button');
-    smaller.textContent = 'A-';
-    smaller.setAttribute('aria-label', '缩小字体');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'nav-link reader-font-link';
+      button.textContent = text;
+      button.setAttribute('aria-label', label);
 
-    const reset = document.createElement('button');
-    reset.textContent = 'A';
-    reset.setAttribute('aria-label', '恢复默认字体');
+      item.appendChild(button);
+      return { item: item, button: button };
+    }
 
-    const larger = document.createElement('button');
-    larger.textContent = 'A+';
-    larger.setAttribute('aria-label', '放大字体');
+    const smallerControl = createFontButton('A-', '缩小字体');
+    const resetControl = createFontButton('A', '恢复默认字体');
+    const largerControl = createFontButton('A+', '放大字体');
 
-    box.appendChild(smaller);
-    box.appendChild(reset);
-    box.appendChild(larger);
-    toolbar.appendChild(box);
+    const nextNode = colorToggleItem.nextSibling;
+    [smallerControl.item, resetControl.item, largerControl.item].forEach(function (item) {
+      if (nextNode) {
+        navList.insertBefore(item, nextNode);
+      } else {
+        navList.appendChild(item);
+      }
+    });
 
     let scale = parseFloat(localStorage.getItem(KEY) || '1');
     applyScale(scale);
 
-    smaller.addEventListener('click', function () {
+    smallerControl.button.addEventListener('click', function () {
       scale = clamp(scale - STEP);
       applyScale(scale.toFixed(2));
     });
 
-    reset.addEventListener('click', function () {
+    resetControl.button.addEventListener('click', function () {
       scale = 1;
       applyScale(scale);
     });
 
-    larger.addEventListener('click', function () {
+    largerControl.button.addEventListener('click', function () {
       scale = clamp(scale + STEP);
       applyScale(scale.toFixed(2));
     });
-
-    window.ReaderToolbar.show();
-    window.addEventListener('scroll', window.ReaderToolbar.show, { passive: true });
-
-    box.addEventListener('click', window.ReaderToolbar.show);
-    box.addEventListener('touchstart', window.ReaderToolbar.show, { passive: true });
   }
 
   if (document.readyState === 'loading') {

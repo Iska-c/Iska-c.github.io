@@ -1,3 +1,44 @@
+:root {
+  --reader-tools-panel-bg: rgba(255, 255, 255, 0.42);
+  --reader-tools-panel-border: rgba(77, 108, 161, 0.18);
+  --reader-tools-panel-shadow: 0 10px 28px rgba(20, 35, 70, 0.08);
+  --reader-tools-button-bg: rgba(255, 255, 255, 0.48);
+  --reader-tools-button-border: rgba(38, 72, 128, 0.12);
+  --reader-tools-button-shadow: 0 3px 10px rgba(34, 63, 120, 0.08);
+  --reader-tools-button-shadow-hover: 0 8px 18px rgba(34, 63, 120, 0.12);
+  --reader-tools-button-shadow-active: 0 3px 10px rgba(34, 63, 120, 0.08);
+  --reader-tools-icon-color: #315da8;
+  --reader-tools-divider: rgba(49, 93, 168, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-user-color-scheme]) {
+    --reader-tools-panel-bg: rgba(32, 39, 52, 0.38);
+    --reader-tools-panel-border: rgba(126, 158, 212, 0.18);
+    --reader-tools-panel-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    --reader-tools-button-bg: rgba(44, 55, 73, 0.42);
+    --reader-tools-button-border: rgba(134, 165, 215, 0.16);
+    --reader-tools-button-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+    --reader-tools-button-shadow-hover: 0 8px 18px rgba(0, 0, 0, 0.24);
+    --reader-tools-button-shadow-active: 0 3px 10px rgba(0, 0, 0, 0.16);
+    --reader-tools-icon-color: #a8c4ff;
+    --reader-tools-divider: rgba(134, 165, 215, 0.16);
+  }
+}
+
+html[data-user-color-scheme="dark"] {
+  --reader-tools-panel-bg: rgba(32, 39, 52, 0.38);
+  --reader-tools-panel-border: rgba(126, 158, 212, 0.18);
+  --reader-tools-panel-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  --reader-tools-button-bg: rgba(44, 55, 73, 0.42);
+  --reader-tools-button-border: rgba(134, 165, 215, 0.16);
+  --reader-tools-button-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  --reader-tools-button-shadow-hover: 0 8px 18px rgba(0, 0, 0, 0.24);
+  --reader-tools-button-shadow-active: 0 3px 10px rgba(0, 0, 0, 0.16);
+  --reader-tools-icon-color: #a8c4ff;
+  --reader-tools-divider: rgba(134, 165, 215, 0.16);
+}
+
 .reader-tools {
   position: fixed;
   right: max(18px, env(safe-area-inset-right));
@@ -8,10 +49,11 @@
   gap: 10px;
   padding: 10px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(20, 35, 70, 0.12);
+  border: 1px solid var(--reader-tools-panel-border);
+  background: var(--reader-tools-panel-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--reader-tools-panel-shadow);
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
@@ -41,9 +83,11 @@
   min-width: 42px !important;
   min-height: 42px !important;
   border-radius: 999px;
-  border: 1px solid rgba(38, 72, 128, 0.12);
-  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(244,248,255,.94));
-  box-shadow: 0 4px 12px rgba(34, 63, 120, 0.10);
+  border: 1px solid var(--reader-tools-button-border);
+  background: var(--reader-tools-button-bg);
+  box-shadow: var(--reader-tools-button-shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 #scroll-top-button,
@@ -62,7 +106,7 @@
 #scroll-down-button i {
   font-size: 30px;
   margin: auto;
-  color: #315da8;
+  color: var(--reader-tools-icon-color);
 }
 
 #scroll-down-button i.scroll-down-icon {
@@ -96,14 +140,14 @@
 #scroll-down-button:hover,
 .reader-font-controls button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(34, 63, 120, 0.16);
+  box-shadow: var(--reader-tools-button-shadow-hover);
 }
 
 #scroll-top-button:active,
 #scroll-down-button:active,
 .reader-font-controls button:active {
   transform: translateY(0);
-  box-shadow: 0 3px 10px rgba(34, 63, 120, 0.12);
+  box-shadow: var(--reader-tools-button-shadow-active);
 }
 
 /* ===============================
@@ -261,13 +305,13 @@
   gap: 8px;
   margin-top: 2px;
   padding-top: 10px;
-  border-top: 1px solid rgba(49, 93, 168, 0.12);
+  border-top: 1px solid var(--reader-tools-divider);
 }
 
 .reader-font-controls button {
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  color: #315da8;
+  color: var(--reader-tools-icon-color);
   letter-spacing: 0.01em;
 }

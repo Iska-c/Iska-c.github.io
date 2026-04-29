@@ -80,14 +80,39 @@ document.addEventListener('DOMContentLoaded', function () {
       toggle.setAttribute('aria-label', '展开章节');
       toggle.innerHTML = '<i class="iconfont icon-arrowright" aria-hidden="true"></i>';
 
+      function setExpanded(expanded) {
+        wrapper.classList.toggle('is-expanded', expanded);
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        section.heading.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+
+      function toggleExpanded() {
+        setExpanded(!wrapper.classList.contains('is-expanded'));
+      }
+
       toggle.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
-
-        const expanded = wrapper.classList.toggle('is-expanded');
-        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        toggleExpanded();
       });
 
+      section.heading.classList.add('chapter-index-heading');
+      section.heading.setAttribute('role', 'button');
+      section.heading.setAttribute('tabindex', '0');
+      section.heading.setAttribute('aria-expanded', 'false');
+
+      section.heading.addEventListener('click', function (event) {
+        if (event.target.closest('a')) return;
+        toggleExpanded();
+      });
+
+      section.heading.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        toggleExpanded();
+      });
+
+      setExpanded(false);
       section.heading.appendChild(toggle);
     });
   });

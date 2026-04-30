@@ -35,14 +35,6 @@ html[data-user-color-scheme="dark"] {
   transform: translateY(0);
 }
 
-@media (max-width: 767.98px) {
-  .reader-tools {
-    right: 12px;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    gap: 8px;
-  }
-}
-
 #scroll-top-button,
 #scroll-down-button {
   position: static !important;
@@ -115,21 +107,6 @@ html[data-user-color-scheme="dark"] {
 #scroll-top-button:focus-visible i,
 #scroll-down-button:focus-visible i {
   color: var(--link-hover-color);
-}
-
-@media (max-width: 767.98px) {
-  #scroll-top-button i,
-  #scroll-down-button i {
-    font-size: 28px;
-  }
-
-  #scroll-top-button,
-  #scroll-down-button {
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
-    min-height: 38px !important;
-  }
 }
 
 /* ===============================

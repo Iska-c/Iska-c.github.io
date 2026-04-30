@@ -254,13 +254,17 @@ html[data-user-color-scheme="dark"] {
   font-size: calc(1rem * var(--reader-font-scale));
 }
 
+.navbar .reader-font-nav-item {
+  display: flex;
+  align-items: center;
+}
+
 .navbar .reader-font-nav-item .reader-font-controls {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  padding-top: 0;
-  padding-bottom: 0;
+  gap: 0.5rem;
+  padding: 0.5rem;
   white-space: nowrap;
 }
 
@@ -270,12 +274,13 @@ html[data-user-color-scheme="dark"] {
   background: transparent;
   box-shadow: none;
   color: var(--navbar-text-color);
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
+  font: inherit;
+  line-height: 1;
   letter-spacing: 0.01em;
   cursor: pointer;
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .navbar .reader-font-nav-item .reader-font-link:hover,
@@ -285,7 +290,6 @@ html[data-user-color-scheme="dark"] {
 
 @media (max-width: 991.98px) {
   .navbar .reader-font-nav-item {
-    display: flex;
     justify-content: center;
   }
 

@@ -155,54 +155,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function createControls() {
     if (!isReadingPage()) return;
-    if (document.querySelector('.reader-font-link')) return;
+    if (document.querySelector('.reader-font-controls')) return;
 
     document.documentElement.classList.add('reader-font-enabled');
     const colorToggleItem = document.querySelector('#color-toggle-btn');
     const navList = colorToggleItem && colorToggleItem.parentNode;
     if (!navList) return;
 
-    function createFontButton(text, label) {
-      const item = document.createElement('li');
-      item.className = 'nav-item reader-font-nav-item';
+    const item = document.createElement('li');
+    item.className = 'nav-item reader-font-nav-item';
 
+    const box = document.createElement('div');
+    box.className = 'nav-link reader-font-controls';
+
+    function createFontButton(text, label) {
       const button = document.createElement('button');
       button.type = 'button';
-      button.className = 'nav-link reader-font-link';
+      button.className = 'reader-font-link';
       button.textContent = text;
       button.setAttribute('aria-label', label);
-
-      item.appendChild(button);
-      return { item: item, button: button };
+      return button;
     }
 
     const smallerControl = createFontButton('A-', '缩小字体');
     const resetControl = createFontButton('A', '恢复默认字体');
     const largerControl = createFontButton('A+', '放大字体');
 
-    const nextNode = colorToggleItem.nextSibling;
-    [smallerControl.item, resetControl.item, largerControl.item].forEach(function (item) {
-      if (nextNode) {
-        navList.insertBefore(item, nextNode);
-      } else {
-        navList.appendChild(item);
-      }
-    });
+    box.appendChild(smallerControl);
+    box.appendChild(resetControl);
+    box.appendChild(largerControl);
+    item.appendChild(box);
+
+    if (colorToggleItem.nextSibling) {
+      navList.insertBefore(item, colorToggleItem.nextSibling);
+    } else {
+      navList.appendChild(item);
+    }
 
     let scale = parseFloat(localStorage.getItem(KEY) || '1');
     applyScale(scale);
 
-    smallerControl.button.addEventListener('click', function () {
+    smallerControl.addEventListener('click', function () {
       scale = clamp(scale - STEP);
       applyScale(scale.toFixed(2));
     });
 
-    resetControl.button.addEventListener('click', function () {
+    resetControl.addEventListener('click', function () {
       scale = 1;
       applyScale(scale);
     });
 
-    largerControl.button.addEventListener('click', function () {
+    largerControl.addEventListener('click', function () {
       scale = clamp(scale + STEP);
       applyScale(scale.toFixed(2));
     });

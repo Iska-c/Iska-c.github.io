@@ -254,7 +254,18 @@ html[data-user-color-scheme="dark"] {
   font-size: calc(1rem * var(--reader-font-scale));
 }
 
+.navbar .reader-font-nav-item .reader-font-controls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: nowrap;
+}
+
 .navbar .reader-font-nav-item .reader-font-link {
+  padding: 0;
   border: none;
   background: transparent;
   box-shadow: none;
@@ -270,4 +281,15 @@ html[data-user-color-scheme="dark"] {
 .navbar .reader-font-nav-item .reader-font-link:hover,
 .navbar .reader-font-nav-item .reader-font-link:focus-visible {
   color: var(--link-hover-color);
+}
+
+@media (max-width: 991.98px) {
+  .navbar .reader-font-nav-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbar .reader-font-nav-item .reader-font-controls {
+    gap: 1rem;
+  }
 }

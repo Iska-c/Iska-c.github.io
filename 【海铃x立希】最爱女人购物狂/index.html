@@ -58,33 +58,33 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/css/main.css?v=20260430001101" />
+<link  rel="stylesheet" href="/css/main.css?v=20260502221315" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css?v=20260430001101" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css?v=20260502221315" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css?v=20260430001101" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css?v=20260502221315" />
   
 
 
 
   
-    <link rel="stylesheet" href="/css/custom.css?v=20260430001101">
+    <link rel="stylesheet" href="/css/custom.css?v=20260502221315">
   
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":false,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":6},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js?v=20260430001101" ></script>
-  <script  src="/js/color-schema.js?v=20260430001101" ></script>
+  <script  src="/js/utils.js?v=20260502221315" ></script>
+  <script  src="/js/color-schema.js?v=20260502221315" ></script>
   
 
 
@@ -266,6 +266,7 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+
 
     </div>
 
@@ -481,18 +482,6 @@
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
 
 
     </div>
@@ -587,8 +576,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js?v=20260430001101" ></script>
-<script  src="/js/plugins.js?v=20260430001101" ></script>
+<script  src="/js/events.js?v=20260502221315" ></script>
+<script  src="/js/plugins.js?v=20260502221315" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -610,92 +599,10 @@
 
 
   
-    <script  src="/js/img-lazyload.js?v=20260430001101" ></script>
+    <script  src="/js/img-lazyload.js?v=20260502221315" ></script>
   
 
 
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    function decorateCollapsibleToc() {
-      var tocBody = jQuery('#toc-body');
-      if (!tocBody.length) { return; }
-
-      tocBody.find('.toc-collapse-toggle').remove();
-      tocBody.find('.toc-list-item').removeClass('toc-item-collapsed toc-item-expanded');
-
-      tocBody.find('.toc-list-item').each(function() {
-        var item = jQuery(this);
-        var childList = item.children('ol');
-        var link = item.children('a.tocbot-link');
-        if (!childList.length || !link.length) { return; }
-
-        childList.removeClass('tocbot-is-collapsed tocbot-is-collapsible').show();
-
-        var targetId = decodeURIComponent(link.attr('href') || '').replace(/^#/, '');
-        var heading = targetId ? document.getElementById(targetId) : null;
-        if (!heading || heading.tagName !== 'H3') {
-          item.addClass('toc-item-expanded');
-          return;
-        }
-
-        item.addClass('toc-item-collapsed');
-
-        var toggle = jQuery('<button class="toc-collapse-toggle" type="button" aria-expanded="false" aria-label="展开子目录"></button>');
-        toggle.on('click', function(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          var expanded = item.hasClass('toc-item-expanded');
-          item.toggleClass('toc-item-expanded', !expanded);
-          item.toggleClass('toc-item-collapsed', expanded);
-          toggle.attr('aria-expanded', expanded ? 'false' : 'true');
-        });
-
-        link.after(toggle);
-      });
-      tocBody.find('.toc-item-expanded > .toc-collapse-toggle').attr('aria-expanded', 'true');
-    }
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      disableTocScrollSync: true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      decorateCollapsibleToc();
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          decorateCollapsibleToc();
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
 
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
@@ -751,19 +658,19 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/js/local-search.js?v=20260430001101" ></script>
+  <script  src="/js/local-search.js?v=20260502221315" ></script>
 
 
 
 
   
-    <script src="/js/custom.js?v=20260430001101"></script>
+    <script src="/js/custom.js?v=20260502221315"></script>
   
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js?v=20260430001101" ></script>
+<script  src="/js/boot.js?v=20260502221315" ></script>
 
 
   

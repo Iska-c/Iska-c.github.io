@@ -124,25 +124,9 @@ document.addEventListener('DOMContentLoaded', function () {
 ========================= */
 (function () {
   const KEY = 'reader-font-scale';
-  const MIN = 0.85;
+  const MIN = 0.65;
   const MAX = 1.35;
   const STEP = 0.05;
-
-  function isReadingPage() {
-    const path = window.location.pathname;
-
-    // 排除目录页
-    if (
-      path === '/fly-or-fall/' ||
-      path === '/race-condition/' ||
-      path === '/tokyo-trash-map/' ||
-      path === '/about/' 
-    ) {
-      return false;
-    }
-
-    return !!document.querySelector('.markdown-body');
-  }
 
   function clamp(value) {
     return Math.min(MAX, Math.max(MIN, value));
@@ -151,13 +135,24 @@ document.addEventListener('DOMContentLoaded', function () {
   function applyScale(scale) {
     document.documentElement.style.setProperty('--reader-font-scale', scale);
     localStorage.setItem(KEY, String(scale));
+
+    document.querySelectorAll('.tagcloud a').forEach(function (link) {
+      if (!link.dataset.readerFontBaseSize) {
+        link.dataset.readerFontBaseSize = link.style.fontSize || window.getComputedStyle(link).fontSize;
+      }
+
+      link.style.fontSize = 'calc(' + link.dataset.readerFontBaseSize + ' * ' + scale + ')';
+    });
   }
 
   function createControls() {
-    if (!isReadingPage()) return;
+    document.documentElement.classList.add('reader-font-enabled');
+
+    let scale = clamp(parseFloat(localStorage.getItem(KEY) || '1') || 1);
+    applyScale(scale);
+
     if (document.querySelector('.reader-font-controls')) return;
 
-    document.documentElement.classList.add('reader-font-enabled');
     const colorToggleItem = document.querySelector('#color-toggle-btn');
     const navList = colorToggleItem && colorToggleItem.parentNode;
     if (!navList) return;
@@ -191,9 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       navList.appendChild(item);
     }
-
-    let scale = parseFloat(localStorage.getItem(KEY) || '1');
-    applyScale(scale);
 
     smallerControl.addEventListener('click', function () {
       scale = clamp(scale - STEP);

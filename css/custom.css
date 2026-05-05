@@ -287,6 +287,23 @@ html[data-user-color-scheme="dark"] {
   font-size: calc(1.5rem * var(--reader-font-scale));
 }
 
+.reader-font-enabled #board .list-group > .h4 {
+  font-size: calc(1.5rem * var(--reader-font-scale));
+}
+
+.reader-font-enabled #board .list-group > .h5 {
+  font-size: calc(1.25rem * var(--reader-font-scale));
+}
+
+.reader-font-enabled #board .list-group .list-group-item {
+  font-size: calc(1rem * var(--reader-font-scale));
+}
+
+.reader-font-enabled #board .list-group .list-group-item time,
+.reader-font-enabled #board .list-group .list-group-item-title {
+  font-size: inherit;
+}
+
 .reader-font-enabled .category .category-item {
   font-size: calc(1.25rem * var(--reader-font-scale));
 }

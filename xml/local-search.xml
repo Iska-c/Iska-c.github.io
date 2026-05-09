@@ -30,11 +30,11 @@
   {% endif %}
   {% if pages %}
   {% for page in pages.toArray() %}
-  {% if post.indexing == undefined or post.indexing %}
+  {% if page.indexing == undefined or page.indexing %}
   <entry>
     <title>{{ page.title }}</title>
-    <link href="{{ [url, post.path] | urlJoin | uriencode }}"/>
-    <url>{{ [url, post.path] | urlJoin | uriencode }}</url>
+    <link href="{{ [url, page.path] | urlJoin | uriencode }}"/>
+    <url>{{ [url, page.path] | urlJoin | uriencode }}</url>
     {% if content %}
     <content type="html"><![CDATA[{{ page.content | noControlChars | safe }}]]></content>
     {% endif %}

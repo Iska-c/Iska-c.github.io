@@ -146,8 +146,6 @@ html[data-user-color-scheme="dark"] {
 
 .status-inline {
   margin-left: 8px;
-  font-size: 0.9em;
-  font-weight: 500;
 }
 
 .status-inline::before {

@@ -225,19 +225,11 @@ html[data-user-color-scheme="dark"] {
   transition: transform .2s ease;
 }
 
-.markdown-body .chapter-index--categorylike .chapter-index-section > h3:hover,
-.markdown-body .chapter-index--categorylike .chapter-index-section > h3:focus-visible {
-  color: var(--link-hover-color) !important;
-  outline: none;
-}
-
 .markdown-body .chapter-index--categorylike .chapter-index-section.is-expanded > h3 {
   color: var(--link-hover-color) !important;
 }
 
-.markdown-body .chapter-index--categorylike .chapter-index-section.is-expanded > h3 .chapter-index-toggle,
-.markdown-body .chapter-index--categorylike .chapter-index-section > h3:hover .chapter-index-toggle,
-.markdown-body .chapter-index--categorylike .chapter-index-section > h3:focus-visible .chapter-index-toggle {
+.markdown-body .chapter-index--categorylike .chapter-index-section.is-expanded > h3 .chapter-index-toggle {
   color: var(--link-hover-color) !important;
 }
 

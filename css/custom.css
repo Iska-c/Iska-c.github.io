@@ -233,6 +233,17 @@ html[data-user-color-scheme="dark"] {
   color: var(--link-hover-color) !important;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .markdown-body .chapter-index--categorylike .chapter-index-section > h3:hover {
+    color: var(--link-hover-color) !important;
+    outline: none;
+  }
+
+  .markdown-body .chapter-index--categorylike .chapter-index-section > h3:hover .chapter-index-toggle {
+    color: var(--link-hover-color) !important;
+  }
+}
+
 .markdown-body .chapter-index--categorylike .chapter-index-section.is-expanded > h3 .chapter-index-toggle i {
   transform: rotate(90deg);
 }

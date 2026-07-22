@@ -27,7 +27,7 @@
 <meta property="og:description" content="知乎体，立希视角。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-24T22:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-22T00:17:30.009Z">
+<meta property="article:modified_time" content="2026-07-22T00:21:31.998Z">
 <meta property="article:author" content="KleinC">
 <meta property="article:tag" content="海希">
 <meta name="twitter:card" content="summary_large_image">
@@ -58,18 +58,18 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="/css/main.css?v=20260722001741" />
+<link  rel="stylesheet" href="/css/main.css?v=20260722005501" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css?v=20260722001741" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css?v=20260722005501" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css?v=20260722001741" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css?v=20260722005501" />
   
 
 
 
   
-    <link rel="stylesheet" href="/css/custom.css?v=20260722001741">
+    <link rel="stylesheet" href="/css/custom.css?v=20260722005501">
   
 
 
@@ -83,8 +83,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="/js/utils.js?v=20260722001741" ></script>
-  <script  src="/js/color-schema.js?v=20260722001741" ></script>
+  <script  src="/js/utils.js?v=20260722005501" ></script>
+  <script  src="/js/color-schema.js?v=20260722005501" ></script>
   
 
 
@@ -273,7 +273,7 @@
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
-          <article class="post-content mx-auto">
+          <article class="post-content mx-auto zhihu-post">
             <h1 id="seo-header">【海希】把朋友变成恋人是种怎样的体验</h1>
             
             
@@ -437,6 +437,194 @@
 
 
 
+  <script>
+    (function () {
+      const root = document.querySelector('.zhihu-post .markdown-body');
+      if (!root || root.dataset.zhihuReady === 'true') return;
+      root.dataset.zhihuReady = 'true';
+
+      Array.from(root.querySelectorAll('p')).forEach((paragraph) => {
+        if (!paragraph.querySelector('br')) return;
+        const fragment = document.createDocumentFragment();
+        paragraph.innerHTML.split(/<br\s*\/?>/i).forEach((part) => {
+          const probe = document.createElement('div');
+          probe.innerHTML = part;
+          if (!probe.textContent.replace(/\u00a0/g, ' ').trim()) return;
+          const next = document.createElement('p');
+          next.innerHTML = part.replace(/^[ \t\r\n\u00a0]+|[ \t\r\n\u00a0]+$/g, '');
+          fragment.appendChild(next);
+        });
+        paragraph.replaceWith(fragment);
+      });
+
+      const nodes = Array.from(root.childNodes);
+      const notes = [];
+      const answer = [];
+      const comments = [];
+      const footer = [];
+      let question = '';
+      let description = '';
+      let author = '';
+      let phase = 'notes';
+
+      function textOf(node) {
+        return (node.textContent || '').replace(/\u00a0/g, ' ').trim();
+      }
+
+      nodes.forEach((node) => {
+        const text = textOf(node);
+        if (!text) {
+          node.remove();
+          return;
+        }
+
+        if (text.indexOf('问题：') === 0) {
+          question = text.replace(/^问题：/, '').trim();
+          node.remove();
+          phase = 'question';
+          return;
+        }
+
+        if (text.indexOf('问题描述：') === 0) {
+          description = text.replace(/^问题描述：/, '').trim();
+          node.remove();
+          return;
+        }
+
+        if (text.indexOf('用户：') === 0) {
+          author = text.replace(/^用户：/, '').trim();
+          node.remove();
+          phase = 'answer';
+          return;
+        }
+
+        if (text === '【评论区】') {
+          node.remove();
+          phase = 'comments';
+          return;
+        }
+
+        if (text === 'END.' || text.indexOf('后记：') === 0) {
+          phase = 'footer';
+        }
+
+        if (phase === 'notes') notes.push(node);
+        else if (phase === 'comments') comments.push(node);
+        else if (phase === 'footer') footer.push(node);
+        else if (phase === 'answer') answer.push(node);
+        else node.remove();
+      });
+
+      const shell = document.createElement('div');
+      shell.className = 'zhihu-shell';
+
+      const nav = document.createElement('div');
+      nav.className = 'zhihu-topbar';
+      nav.innerHTML = '<div class="zhihu-brand">知乎</div><div class="zhihu-nav"><span>首页</span><span>会员</span><span>发现</span><span>等你来答</span></div><div class="zhihu-search">搜索你感兴趣的内容</div><button type="button">提问</button>';
+
+      const main = document.createElement('div');
+      main.className = 'zhihu-main';
+
+      const content = document.createElement('div');
+      content.className = 'zhihu-content';
+
+      const questionCard = document.createElement('section');
+      questionCard.className = 'zhihu-question-card';
+      questionCard.innerHTML = '<h1></h1><p></p>';
+      questionCard.querySelector('h1').textContent = question || document.title;
+      questionCard.querySelector('p').textContent = description;
+
+      notes.forEach((node) => node.remove());
+
+      const answerCard = document.createElement('section');
+      answerCard.className = 'zhihu-answer-card';
+      const vote = document.createElement('aside');
+      vote.className = 'zhihu-vote';
+      vote.innerHTML = '<button type="button">▲<span>赞同</span></button><button type="button">▼</button>';
+      const answerBody = document.createElement('div');
+      answerBody.className = 'zhihu-answer-body';
+      const authorRow = document.createElement('div');
+      authorRow.className = 'zhihu-author';
+      const authorName = author || '匿名用户';
+      const isFriendPage = window.location.pathname.indexOf('/friend-to-lover/') === 0;
+      const stats = isFriendPage
+        ? { saves: 47, likes: 99 }
+        : { saves: 89, likes: 99 };
+      const authorIntro = isFriendPage
+        ? '鼓手、作曲者、熊猫话题优秀答主'
+        : '贝斯手、健身爱好者';
+      const avatarSrc = isFriendPage
+        ? '/img/zhihu-taki-avatar.jpg'
+        : '/img/zhihu-umiri-avatar.jpg';
+      authorRow.innerHTML = '<img class="zhihu-avatar" alt=""><div><strong></strong><span></span></div>';
+      authorRow.querySelector('.zhihu-avatar').src = avatarSrc;
+      authorRow.querySelector('.zhihu-avatar').alt = authorName + '的头像';
+      authorRow.querySelector('strong').textContent = authorName;
+      authorRow.querySelector('span').textContent = authorIntro;
+      const answerContent = document.createElement('div');
+      answerContent.className = 'zhihu-answer-text';
+      answer.forEach((node) => answerContent.appendChild(node));
+      const actionRow = document.createElement('div');
+      actionRow.className = 'zhihu-actions';
+      actionRow.innerHTML = [
+        '<div class="zhihu-action-author"><img alt=""><span></span><button type="button">+ 关注</button></div>',
+        '<div class="zhihu-action-icons">',
+        '<div class="zhihu-vote-actions"><button type="button" class="zhihu-action zhihu-action-up" aria-label="赞同"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5 5 17h14L12 5Z"/></svg><span>赞同 ' + stats.likes + '</span></button><button type="button" class="zhihu-action zhihu-action-down" aria-label="反对"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19 5 7h14L12 19Z"/></svg></button></div>',
+        '<button type="button" class="zhihu-action" aria-label="评论"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span>评论</span></button>',
+        '<button type="button" class="zhihu-action" aria-label="收藏"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 21l1.1-6.5-4.7-4.6 6.5-.9L12 3Z"/></svg><span>' + stats.saves + '</span></button>',
+        '<button type="button" class="zhihu-action" aria-label="喜欢"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg><span>喜欢</span></button>',
+        '<button type="button" class="zhihu-action" aria-label="分享"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8h16v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg><span>分享</span></button>',
+        '</div>'
+      ].join('');
+      actionRow.querySelector('.zhihu-action-author img').src = avatarSrc;
+      actionRow.querySelector('.zhihu-action-author img').alt = authorName + '的头像';
+      actionRow.querySelector('.zhihu-action-author span').textContent = authorName;
+      answerBody.appendChild(authorRow);
+      answerBody.appendChild(answerContent);
+      answerBody.appendChild(actionRow);
+      answerCard.appendChild(vote);
+      answerCard.appendChild(answerBody);
+
+      content.appendChild(questionCard);
+      content.appendChild(answerCard);
+
+      if (comments.length) {
+        const commentCard = document.createElement('section');
+        commentCard.className = 'zhihu-comment-card';
+        commentCard.innerHTML = '<h2>评论区</h2>';
+        comments.forEach((node) => commentCard.appendChild(node));
+        content.appendChild(commentCard);
+      }
+
+      if (footer.length) {
+        const footerCard = document.createElement('section');
+        footerCard.className = 'zhihu-footer-card';
+        footer.forEach((node) => footerCard.appendChild(node));
+        content.appendChild(footerCard);
+      }
+
+      const relatedHref = isFriendPage ? '/realized-love/' : '/friend-to-lover/';
+      const relatedTitle = isFriendPage ? '你是怎么意识到自己喜欢上一个人的' : '把朋友变成恋人是种怎样的体验';
+
+      const mobileRelated = document.createElement('section');
+      mobileRelated.className = 'zhihu-mobile-related';
+      mobileRelated.innerHTML = '<strong>相关回答</strong><a href="' + relatedHref + '">' + relatedTitle + '</a>';
+      content.appendChild(mobileRelated);
+
+      const side = document.createElement('aside');
+      side.className = 'zhihu-side';
+      side.innerHTML = '<div class="zhihu-side-card"><strong>相关回答</strong><a href="' + relatedHref + '">' + relatedTitle + '</a></div>';
+
+      main.appendChild(content);
+      main.appendChild(side);
+      shell.appendChild(nav);
+      shell.appendChild(main);
+      root.replaceChildren(shell);
+    })();
+  </script>
+
+
+
 
     
 
@@ -498,8 +686,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js?v=20260722001741" ></script>
-<script  src="/js/plugins.js?v=20260722001741" ></script>
+<script  src="/js/events.js?v=20260722005501" ></script>
+<script  src="/js/plugins.js?v=20260722005501" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -521,7 +709,7 @@
 
 
   
-    <script  src="/js/img-lazyload.js?v=20260722001741" ></script>
+    <script  src="/js/img-lazyload.js?v=20260722005501" ></script>
   
 
 
@@ -580,19 +768,19 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script  src="/js/local-search.js?v=20260722001741" ></script>
+  <script  src="/js/local-search.js?v=20260722005501" ></script>
 
 
 
 
   
-    <script src="/js/custom.js?v=20260722001741"></script>
+    <script src="/js/custom.js?v=20260722005501"></script>
   
 
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js?v=20260722001741" ></script>
+<script  src="/js/boot.js?v=20260722005501" ></script>
 
 
   
